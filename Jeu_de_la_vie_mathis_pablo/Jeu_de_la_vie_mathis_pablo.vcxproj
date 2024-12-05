@@ -133,12 +133,14 @@
     <ClCompile Include="cellule.cpp" />
     <ClCompile Include="fichier.cpp" />
     <ClCompile Include="grille.cpp" />
+    <ClCompile Include="lancement.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cellule.hpp" />
     <ClInclude Include="fichier.hpp" />
     <ClInclude Include="grille.hpp" />
+    <ClInclude Include="lancement.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,11 +13,11 @@ private:
     int compterVoisinsVivants(int x, int y) const;
 
 public:
-    grille(int h, int l);
+    grille();
 
-    void initialiser(const std::vector<std::pair<int, int>>& positionsVivantes);
-    void afficher() const;
+    void initialiser(std::vector<std::vector<cellule>> entreeGrille);
+    void afficher() const; // On met en const lorsque l'on à pas besoin de modifier
     void prochaineGeneration();
 };
 
-#endif // GRILLE_HPP
+#endif 

@@ -14,10 +14,10 @@ public:
     void charger(std::string);
     void affiche() const;
     std::vector<std::vector<cellule>>& obtenirGrille();
-
-private:
-    int* hauteur, * longeur;
     std::vector<std::vector<cellule>> maGrille;
+    int* hauteur, * longeur;
+       
+    
 };
 
 #endif

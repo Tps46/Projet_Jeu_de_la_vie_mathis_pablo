@@ -11,4 +11,4 @@ public:
     bool obtenirEtat() const;
 };
 
-#endif // CELLULE_HPP
+#endif 

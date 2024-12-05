@@ -2,67 +2,87 @@
 #include "fichier.hpp"
 #include <iostream>
 
-grille::grille(int h, int l) : hauteur(h), largeur(l) {
-    
-    std::cout << "iccccccccccccccccccci : " << "e" << std::endl;
-    
-    std::cout << "f.obtenirGrille()[1][1]" << std::endl;
-    cellules = std::vector<std::vector<cellule>>(hauteur, std::vector<cellule>(largeur));
+grille::grille() {
+ //pas besoin de constructeur autre que celui par defaut A MODIFIERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 }
 
-void grille::initialiser(const std::vector<std::pair<int, int>>& positionsVivantes) {
-    for (const auto& pos : positionsVivantes) {
-        int x = pos.first;
-        int y = pos.second;
-        if (x >= 0 && x < hauteur && y >= 0 && y < largeur) {
-            cellules[x][y].definirEtat(true); // Rendre vivante
-        }
-    }
+void grille::initialiser(std::vector<std::vector<cellule>> entreeGrille) {
+
+    cellules = entreeGrille;
+    std::cout << "x : " << cellules.size() << std::endl;
+    std::cout << "y : " << cellules[0].size() << std::endl;
+
 }
 
 void grille::afficher() const {
-    fichier f;
-    f.obtenirGrille();
-    for (int i = 0; i < hauteur; ++i) {
-        for (int j = 0; j < largeur; ++j) {
-            std::cout << (f.obtenirGrille[i][j].obtenirEtat() ? 'O' : 'L') << " ";
+    for (int i = 0; i < cellules.size(); ++i) {
+        for (int j = 0; j < cellules[0].size(); ++j) {
+            std::cout << (cellules[i][j].obtenirEtat() ? '1' : '0') << " ";
         }
         std::cout << std::endl;
     }
 }
 
 int grille::compterVoisinsVivants(int x, int y) const {
-    int compte = 0;
+    int compteur = 0;
     for (int i = -1; i <= 1; ++i) {
         for (int j = -1; j <= 1; ++j) {
-            if (i == 0 && j == 0) continue; // Ne pas compter la cellule elle-même
-            int voisinX = x + i;
-            int voisinY = y + j;
-            if (voisinX >= 0 && voisinX < hauteur && voisinY >= 0 && voisinY < largeur) {
-                if (cellules[voisinX][voisinY].obtenirEtat()) {
-                    ++compte;
+
+            int xi = x + i;
+            
+            if (xi < 0) { // torique
+                xi = cellules.size() + xi;
+            }
+            else if (xi >= cellules.size()) { // torique
+                xi = xi - cellules.size();
+            }
+            else {
+
+            }
+
+            int yj = y + j;
+
+            if (yj < 0) { // torique
+                yj = cellules[0].size() + yj;
+            }
+            else if (yj >= cellules[0].size()) { // torique
+                yj = yj - cellules[0].size();
+            }
+            else {
+
+            }
+
+            if ((cellules[xi][yj].obtenirEtat() == true) and !(i == 0 and j == 0)) {
+                
+                compteur += 1;
+            }            
+        }        
+    }
+    
+    return compteur;
+}
+
+
+void grille::prochaineGeneration() {
+    std::vector<std::vector<cellule>> nouvelleGrille = cellules; //Si je ne fais pas ça les cellules changent en même temps que je la parcours
+
+    for (int i = 0; i < cellules.size(); ++i) {
+        for (int j = 0; j < cellules[0].size(); ++j) {
+            int voisinsVivants = compterVoisinsVivants(i, j);
+
+            if (cellules[i][j].obtenirEtat() == true) { //cellule vivante reste vivant si 2 ou 3 voisines
+                if (voisinsVivants != 2 and voisinsVivants != 3) {
+                    nouvelleGrille[i][j].definirEtat(false);
+                }
+            }
+            else if (cellules[i][j].obtenirEtat() == false) { //cellule morte devient vivante si exactement 3 voisines
+                if (voisinsVivants == 3) { 
+                    nouvelleGrille[i][j].definirEtat(true);
                 }
             }
         }
     }
-    return compte;
+
+    // applique les nouveaux états à la grille principale, en faisant cela les calculs de compterVoisinsVivants ne changent pas en cours de route
+        cellules = nouvelleGrille;
 }
-
-void grille::prochaineGeneration() {
-    std::vector<std::vector<cellule>> nouvelleGrille = cellules;
-
-    for (int i = 0; i < hauteur; ++i) {
-        for (int j = 0; j < largeur; ++j) {
-            int voisinsVivants = compterVoisinsVivants(i, j);
-            if (cellules[i][j].obtenirEtat()) {
-                nouvelleGrille[i][j].definirEtat(voisinsVivants == 2 || voisinsVivants == 3);
-            }
-            else {
-                nouvelleGrille[i][j].definirEtat(voisinsVivants == 3);
-            }
-        }
-    }
-
-    cellules = nouvelleGrille; // Mise à jour de l'état de la grille
-}
-

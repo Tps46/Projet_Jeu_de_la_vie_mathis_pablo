@@ -6,7 +6,7 @@
 #include <vector>
 
 fichier::fichier() {
-    hauteur = new int;
+    hauteur = new int;      // vrm besoin de ça ???????????????????????????????????????????????
     longeur = new int;
 }
 
@@ -31,9 +31,9 @@ void fichier::charger(std::string filename) {
         }
 
         // Redimensionner la grille selon les dimensions lues
-        maGrille.resize(*longeur, std::vector<cellule>(*hauteur));
+        maGrille.resize(*hauteur, std::vector<cellule>(*longeur));
 
-        int isaut = 0;  // Indice de la ligne
+        int isaut = 0;  // Indice de la ligne, colonne
         int iespace = 0;  // Indice de la colonne
 
         // Lire le reste du fichier et remplir la grille
@@ -48,9 +48,8 @@ void fichier::charger(std::string filename) {
             else if (ch == '0' || ch == '1') {  // Lire '0' ou '1'
                 std::cout << "chek: " << ch << std::endl;
                 // Créer une cellule avec l'état approprié
-                maGrille[iespace][isaut] = cellule(ch == '1');  // '1' -> true, '0' -> false
-                
-                
+                maGrille[isaut][iespace] = cellule(ch == '1');  // '1' -> true, '0' -> false
+                                
             }
         }
 
@@ -60,7 +59,7 @@ void fichier::charger(std::string filename) {
         std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
     }
 }
-
+ 
 
 void fichier::affiche() const {
     std::cout << "haut eurrrrr: " << *hauteur << std::endl;
@@ -68,9 +67,9 @@ void fichier::affiche() const {
     for (int i = 0; i < *hauteur; ++i) {
         for (int j = 0; j < *longeur; ++j) {
             // Vérifiez l'état de la cellule directement
-            std::cout << (maGrille[j][i].obtenirEtat() ? 'O' : 'L') << " ";
+            std::cout << (maGrille[i][j].obtenirEtat() ? '1' : '0') << " ";
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
 }
 
