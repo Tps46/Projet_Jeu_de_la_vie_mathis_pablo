@@ -21,7 +21,7 @@ void lancement::lelancement() {
     maGrille.afficher();
 
 
-    for (int i = 1; i < 5; ++i) {
+    for (int i = 1; i < 7; ++i) {
         maGrille.prochaineGeneration();
         std::cout << "Generation suivante:" << std::endl;
         maGrille.afficher();
