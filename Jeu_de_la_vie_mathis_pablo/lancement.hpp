@@ -2,6 +2,7 @@
 #define LANCEMENT_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class lancement {
 public:

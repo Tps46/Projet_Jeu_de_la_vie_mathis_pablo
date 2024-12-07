@@ -6,6 +6,11 @@ grille::grille() {
  //pas besoin de constructeur autre que celui par defaut A MODIFIERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 }
 
+std::vector<std::vector<cellule>>& grille::obtenirCellules() {
+    return cellules;
+}
+
+
 void grille::initialiser(std::vector<std::vector<cellule>> entreeGrille) {
 
     cellules = entreeGrille;

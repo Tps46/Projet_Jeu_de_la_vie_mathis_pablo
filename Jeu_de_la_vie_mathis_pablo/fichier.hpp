@@ -1,23 +1,31 @@
-#ifndef FICHIER_HPP_INCLUDED
-#define FICHIER_HPP_INCLUDED
+#ifndef FICHIER_HPP
+#define FICHIER_HPP
 
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <vector>
+#include <string>
 #include "cellule.hpp"
+#include "grille.hpp"
 
 class fichier {
+private:
+    int hauteur;
+    int longeur;
+    std::vector<std::vector<cellule>> maGrille;
+    std::string nomFichier;
+    
+
 public:
     fichier();
     ~fichier();
-    void charger(std::string);
+
+        void charger(const std::string& filename);
+
     void affiche() const;
     std::vector<std::vector<cellule>>& obtenirGrille();
-    std::vector<std::vector<cellule>> maGrille;
-    int* hauteur, * longeur;
-       
     
+    void ecrire(int generation, grille& maGrille);
+
+
 };
 
-#endif
+#endif // FICHIER_HPP

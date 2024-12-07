@@ -9,12 +9,13 @@ private:
     int hauteur;
     int largeur;
     std::vector<std::vector<cellule>> cellules;
-
+    
     int compterVoisinsVivants(int x, int y) const;
 
 public:
     grille();
 
+    std::vector<std::vector<cellule>>& obtenirCellules();
     void initialiser(std::vector<std::vector<cellule>> entreeGrille);
     void afficher() const; // On met en const lorsque l'on à pas besoin de modifier
     void prochaineGeneration();

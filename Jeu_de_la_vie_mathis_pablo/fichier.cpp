@@ -5,74 +5,93 @@
 #include <string>
 #include <vector>
 
-fichier::fichier() {
-    hauteur = new int;      // vrm besoin de ça ???????????????????????????????????????????????
-    longeur = new int;
-}
 
-fichier::~fichier() {
-    delete hauteur;
-    delete longeur;
-}
+fichier::fichier() : hauteur(0), longeur(0) {}
 
-void fichier::charger(std::string filename) {
-    std::ifstream file(filename);
-    if (file.is_open()) {
-        std::string line;
-        char ch;
+fichier::~fichier() {}
 
-        // Lire les dimensions du fichier
-        if (std::getline(file, line)) {
-            std::istringstream iss(line);
-            if (iss >> *hauteur >> *longeur) {
-                std::cout << "hauteur: " << *hauteur << std::endl;
-                std::cout << "longeur: " << *longeur << std::endl;
+void fichier::charger(const std::string& filename) {
+    nomFichier = filename; // Enregistrer le nom du fichier d'entrée (sans le txt) nous le réutilisons pour l'écriture
+    std::ifstream file(filename + ".txt");
+    if (!file.is_open()) {
+        std::cerr << "Erreur lors de l'ouverture du fichier : " << nomFichier << std::endl;
+        return;
+    }
+
+    // Lire les dimensions du fichier
+    if (!(file >> hauteur >> longeur)) {
+        std::cerr << "Erreur de lecture des dimensions." << std::endl;
+        return;
+    }
+
+    std::cout << "hauteur: " << hauteur << ", longeur: " << longeur << std::endl;
+
+    // Redimensionner la grille
+    maGrille.resize(hauteur, std::vector<cellule>(longeur));
+
+    // Lire les valeurs de la grille
+    char ch;
+    int row = 0, col = 0;
+
+    while (file.get(ch)) {
+        if (ch == '0' || ch == '1') {
+            maGrille[row][col] = cellule(ch == '1');
+            ++col;
+            if (col == longeur) {
+                col = 0;
+                ++row;
             }
         }
-
-        // Redimensionner la grille selon les dimensions lues
-        maGrille.resize(*hauteur, std::vector<cellule>(*longeur));
-
-        int isaut = 0;  // Indice de la ligne, colonne
-        int iespace = 0;  // Indice de la colonne
-
-        // Lire le reste du fichier et remplir la grille
-        while (file.get(ch)) {
-            if (ch == '\n') {  // Nouvelle ligne
-                isaut += 1;
-                iespace = 0;  // Revenir à la première colonne
-            }
-            else if (ch == ' ') {  // Espace entre les valeurs
-                iespace += 1;
-            }
-            else if (ch == '0' || ch == '1') {  // Lire '0' ou '1'
-                std::cout << "chek: " << ch << std::endl;
-                // Créer une cellule avec l'état approprié
-                maGrille[isaut][iespace] = cellule(ch == '1');  // '1' -> true, '0' -> false
-                                
-            }
-        }
-
-        file.close();
     }
-    else {
-        std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
+
+    if (row != hauteur || col != 0) {
+        std::cerr << "Données incomplètes ou format incorrect." << std::endl;
     }
 }
- 
 
 void fichier::affiche() const {
-    std::cout << "haut eurrrrr: " << *hauteur << std::endl;
-    std::cout << "long eurrrrr: " << *longeur << std::endl;
-    for (int i = 0; i < *hauteur; ++i) {
-        for (int j = 0; j < *longeur; ++j) {
-            // Vérifiez l'état de la cellule directement
-            std::cout << (maGrille[i][j].obtenirEtat() ? '1' : '0') << " ";
+    for (const auto& ligne : maGrille) {
+        for (const auto& cell : ligne) {
+            std::cout << (cell.obtenirEtat() ? '1' : '0') << " ";
         }
         std::cout << "\n";
     }
 }
 
-std::vector<std::vector<cellule>>& fichier::obtenirGrille() { 
-    return maGrille; 
+std::vector<std::vector<cellule>>& fichier::obtenirGrille() {
+    return maGrille;
 }
+
+void fichier::ecrire(int generation, grille& maGrille) {
+    
+    // Calculer la prochaine génération
+    maGrille.prochaineGeneration();
+
+    // Obtenir la grille après génération
+    const auto& nouvelleGrille = maGrille.obtenirCellules();
+
+
+    std::string outputFilename = nomFichier + "_out_" + std::to_string(generation) + ".txt";
+    // Ouvrir le fichier pour l'écriture
+    std::ofstream outputFile(outputFilename);
+    if (!outputFile.is_open()) {
+        std::cerr << "Erreur lors de l'ouverture du fichier en écriture : " << outputFilename << std::endl;
+        return;
+    }
+
+    // Écrire les dimensions
+    outputFile << nouvelleGrille.size() << " " << nouvelleGrille[0].size() << "\n";
+
+    // Écrire la grille
+    for (const auto& ligne : nouvelleGrille) {
+        for (const auto& cell : ligne) {
+            outputFile << (cell.obtenirEtat() ? '1' : '0') << " ";
+        }
+        outputFile << "\n";
+    }
+
+    outputFile.close();
+}
+
+
+
