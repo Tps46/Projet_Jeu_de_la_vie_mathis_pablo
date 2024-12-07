@@ -18,7 +18,7 @@ public:
     fichier();
     ~fichier();
 
-        void charger(const std::string& filename);
+    void charger(const std::string& filename);
 
     void affiche() const;
     std::vector<std::vector<cellule>>& obtenirGrille();
