@@ -59,15 +59,6 @@ void fichier::charger(const std::string& filename) {
     }
 }
 
-void fichier::affiche() const {
-    for (const auto& ligne : maGrille) {
-        for (const auto& cell : ligne) {
-            std::cout << (cell.obtenirEtat() ? '1' : '0') << " ";
-        }
-        std::cout << "\n";
-    }
-}
-
 std::vector<std::vector<cellule>>& fichier::obtenirGrille() {
     return maGrille;
 }

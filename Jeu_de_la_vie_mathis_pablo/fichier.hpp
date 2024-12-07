@@ -20,7 +20,6 @@ public:
 
     void charger(const std::string& filename);
 
-    void affiche() const;
     std::vector<std::vector<cellule>>& obtenirGrille();
     
     void ecrire(int generation, grille& maGrille);
