@@ -3,7 +3,7 @@
 int main() {
 
     lancement lance;
-    lance.lelancement();
+    lance.leLancement();
 
     return 0;
 }

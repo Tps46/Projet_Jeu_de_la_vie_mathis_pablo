@@ -4,11 +4,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <windows.h>
+#include <windows.h> //pour les dossiers
 
 fichier::fichier() : hauteur(0), longeur(0) {}
-
-fichier::~fichier() {}
 
 void fichier::charger(const std::string& filename) {
     nomFichier = filename; // Enregistrer le nom du fichier d'entrée (sans le txt) nous le réutilisons pour l'écriture
@@ -56,15 +54,6 @@ void fichier::charger(const std::string& filename) {
         } 
         
         return; 
-    }
-}
-
-void fichier::affiche() const {
-    for (const auto& ligne : maGrille) {
-        for (const auto& cell : ligne) {
-            std::cout << (cell.obtenirEtat() ? '1' : '0') << " ";
-        }
-        std::cout << "\n";
     }
 }
 

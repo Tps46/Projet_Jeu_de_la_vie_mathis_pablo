@@ -12,7 +12,7 @@ std::vector<std::vector<cellule>>& grille::obtenirCellules() {
 
 
 void grille::initialiser(std::vector<std::vector<cellule>> entreeGrille) {
-
+    
     cellules = entreeGrille;
     std::cout << "x : " << cellules.size() << std::endl;
     std::cout << "y : " << cellules[0].size() << std::endl;
@@ -90,4 +90,4 @@ void grille::prochaineGeneration() {
 
     // applique les nouveaux états à la grille principale, en faisant cela les calculs de compterVoisinsVivants ne changent pas en cours de route
         cellules = nouvelleGrille;
-}
+}       

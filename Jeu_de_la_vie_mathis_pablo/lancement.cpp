@@ -5,8 +5,8 @@
 lancement::lancement(){}
 
 
-void lancement::lelancement() {
-
+void lancement::leLancement() {
+    
     fichier f;
     f.charger("test");
     //f.affiche();
@@ -23,7 +23,7 @@ void lancement::lelancement() {
 
     for (int i = 1; i < 7; ++i) {
         maGrille.prochaineGeneration();
-        std::cout << "Generation suivante:" << std::endl;
+        std::cout << "\nGeneration n+" + std::to_string(i) + " :" << std::endl;
         maGrille.afficher();
 
 

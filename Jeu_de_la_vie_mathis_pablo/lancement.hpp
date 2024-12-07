@@ -6,7 +6,7 @@
 
 class lancement {
 public:
-    void lelancement();
+    void leLancement();
     lancement();
 };
 
