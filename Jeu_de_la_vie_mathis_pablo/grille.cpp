@@ -20,7 +20,7 @@ void grille::initialiser(std::vector<std::vector<cellule>> entreeGrille) {
 void grille::afficher() const {
     for (int i = 0; i < cellules.size(); ++i) {
         for (int j = 0; j < cellules[0].size(); ++j) {
-            std::cout << (cellules[j][i].obtenirEtat() ? '1' : '0') << " ";
+            std::cout << (cellules[i][j].obtenirEtat() ? '1' : '0') << " ";
         }
         std::cout << std::endl;
     }

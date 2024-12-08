@@ -9,19 +9,30 @@ lancement::lancement(){}
 
 void lancement::leLancement()
 {
-    //lancementConsole();
-    lancementGraphique();
+    int mode_lancement;
+    std::cout << "saisir mode de lancement 1 pour Console\n2 pour Graphique" << std::endl;
+    std::cin >> mode_lancement;
+    switch (mode_lancement) {
+    case (1):
+        lancementConsole();
+        break;
+    case (2):
+        lancementGraphique();
+        break;
+    default:
+        lancementGraphique();
+    }
 }
 
 void lancement::lancementGraphique() {
-    fichier f;
-    f.charger("test");
+    fichier fichierGraphique;
+    fichierGraphique.charger("test");
     // f.affiche();
 
     grille maGrille;
 
     // Initialiser avec quelques cellules vivantes
-    maGrille.initialiser(f.obtenirGrille());
+    maGrille.initialiser(fichierGraphique.obtenirGrille());
 
     // Créer l'objet graphique
     graphique g;
@@ -29,11 +40,10 @@ void lancement::lancementGraphique() {
     g.renderGrid(maGrille.obtenirCellules());
 
     // Boucle pour itérer sur les générations
-    for (int i = 1; i < 7; ++i) {
+    for (int i = 1; i < 10; ++i) {
         maGrille.prochaineGeneration();
-        std::cout << "Generation suivante:" << std::endl;
-        
-        f.ecrire(i, maGrille);
+                
+        fichierGraphique.ecrire(i, maGrille);
 
         // Appeler la fonction graphique pour afficher la nouvelle génération
         
@@ -43,14 +53,13 @@ void lancement::lancementGraphique() {
 
 void lancement::lancementConsole()
 {
-    fichier f;
-    f.charger("test");
-    // f.affiche();
-
+    fichier fichierConsole;
+    fichierConsole.charger("test");
+    
     grille maGrille;
 
     // Initialiser avec quelques cellules vivantes
-    maGrille.initialiser(f.obtenirGrille());
+    maGrille.initialiser(fichierConsole.obtenirGrille());
 
     std::cout << "Generation initiale:" << std::endl;
     maGrille.afficher();
@@ -61,7 +70,7 @@ void lancement::lancementConsole()
         std::cout << "Generation suivante:" << std::endl;
         maGrille.afficher();
 
-        f.ecrire(i, maGrille);
+        fichierConsole.ecrire(i, maGrille);
 
     }
 
