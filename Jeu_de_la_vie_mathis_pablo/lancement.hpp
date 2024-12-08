@@ -7,11 +7,15 @@
 class lancement {
 public:
     void leLancement();
+    lancement();
+
+private:
+    int nombre_iteration;
     void lancementGraphique(int duree_iteration);
     void lancementConsole();
     void lancementTest_unitaire();
     void menu();
-    lancement();
+   
 };
 
 #endif
