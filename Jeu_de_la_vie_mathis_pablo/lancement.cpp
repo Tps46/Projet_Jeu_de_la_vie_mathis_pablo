@@ -25,8 +25,9 @@ void lancement::leLancement()
 }
 
 void lancement::lancementGraphique() {
+
     fichier fichierGraphique;
-    fichierGraphique.charger("test");
+    fichierGraphique.charger("test3");
     // f.affiche();
 
     grille maGrille;
@@ -40,7 +41,7 @@ void lancement::lancementGraphique() {
     g.renderGrid(maGrille.obtenirCellules());
 
     // Boucle pour itérer sur les générations
-    for (int i = 1; i < 10; ++i) {
+    for (int i = 1; i < 3; ++i) {
         maGrille.prochaineGeneration();
                 
         fichierGraphique.ecrire(i, maGrille);
@@ -54,7 +55,7 @@ void lancement::lancementGraphique() {
 void lancement::lancementConsole()
 {
     fichier fichierConsole;
-    fichierConsole.charger("test");
+    fichierConsole.charger("test3");
     
     grille maGrille;
 
@@ -65,7 +66,7 @@ void lancement::lancementConsole()
     maGrille.afficher();
 
     // Boucle pour itérer sur les générations
-    for (int i = 1; i < 7; ++i) {
+    for (int i = 1; i < 3; ++i) {
         maGrille.prochaineGeneration();
         std::cout << "Generation suivante:" << std::endl;
         maGrille.afficher();

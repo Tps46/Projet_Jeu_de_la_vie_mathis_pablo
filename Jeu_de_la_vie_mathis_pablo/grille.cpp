@@ -67,18 +67,21 @@ int grille::compterVoisinsVivants(int x, int y) const {
 
 
 void grille::prochaineGeneration() {
-    std::vector<std::vector<cellule>> nouvelleGrille = cellules; //Si je ne fais pas �a les cellules changent en m�me temps que je la parcours
+    std::vector<std::vector<cellule>> nouvelleGrille = cellules; // Copie de la grille pour appliquer les changements après avoir compté les voisins
 
     for (int i = 0; i < cellules.size(); ++i) {
         for (int j = 0; j < cellules[0].size(); ++j) {
             int voisinsVivants = compterVoisinsVivants(i, j);
 
-            if (cellules[i][j].obtenirEtat() == true) { //cellule vivante reste vivant si 2 ou 3 voisines
-                if (voisinsVivants != 2 and voisinsVivants != 3) {
+            // Debug : Affichage du nombre de voisins vivants pour chaque cellule
+            std::cout << "Cellule (" << i << ", " << j << ") a " << voisinsVivants << " voisins vivants." << std::endl;
+
+            if (cellules[i][j].obtenirEtat() == true) { // Cellule vivante
+                if (voisinsVivants != 2 && voisinsVivants != 3) {
                     nouvelleGrille[i][j].definirEtat(false);
                 }
             }
-            else if (cellules[i][j].obtenirEtat() == false) { //cellule morte devient vivante si exactement 3 voisines
+            else if (cellules[i][j].obtenirEtat() == false) { // Cellule morte
                 if (voisinsVivants == 3) {
                     nouvelleGrille[i][j].definirEtat(true);
                 }
@@ -86,6 +89,6 @@ void grille::prochaineGeneration() {
         }
     }
 
-    // applique les nouveaux �tats � la grille principale, en faisant cela les calculs de compterVoisinsVivants ne changent pas en cours de route
+    // Appliquer les nouveaux états
     cellules = nouvelleGrille;
 }

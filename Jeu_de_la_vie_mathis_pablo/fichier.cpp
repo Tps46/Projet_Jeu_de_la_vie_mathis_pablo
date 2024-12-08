@@ -24,8 +24,6 @@ void fichier::charger(const std::string& filename) {
         return;
     }
 
-    std::cout << "hauteur: " << hauteur << ", longeur: " << longeur << std::endl;
-
     // Redimensionner la grille
     maGrille.resize(hauteur, std::vector<cellule>(longeur));
 
@@ -64,9 +62,6 @@ std::vector<std::vector<cellule>>& fichier::obtenirGrille() {
 }
 
 void fichier::ecrire(int generation, grille& maGrille) {
-    
-    // Calculer la prochaine génération
-    maGrille.prochaineGeneration();
 
     // Obtenir la grille après génération
     const auto& nouvelleGrille = maGrille.obtenirCellules();
