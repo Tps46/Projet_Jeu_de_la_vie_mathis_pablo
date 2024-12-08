@@ -15,17 +15,16 @@ private:
     const int gridWidth;
     const int gridHeight;
     std::vector<std::vector<cellule>> grid;
-    
+    sf::RenderWindow window;
 
 public:
     
-    void renderGrid(sf::RenderWindow& window, std::vector<std::vector<cellule>> grid);
+    void renderGrid(std::vector<std::vector<cellule>> grid);
     graphique();
     void initialiser(std::vector<std::vector<cellule>> grid);
 
     std::vector<std::vector<cellule>>& obtenirGrid();
 };
-
 
 
 #endif

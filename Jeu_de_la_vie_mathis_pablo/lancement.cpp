@@ -22,7 +22,7 @@ void lancement::lelancement() {
 
     // Créer l'objet graphique
     graphique g;
-
+    g.initialiser(maGrille.obtenirCellules());
     // Boucle pour itérer sur les générations
     for (int i = 1; i < 7; ++i) {
         maGrille.prochaineGeneration();
@@ -32,8 +32,8 @@ void lancement::lelancement() {
         f.ecrire(i, maGrille);
 
         // Appeler la fonction graphique pour afficher la nouvelle génération
-        g.initialiser(maGrille.obtenirCellules());
         
+        g.renderGrid(maGrille.obtenirCellules());
     }
 }
 
