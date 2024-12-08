@@ -1,9 +1,9 @@
-#include "grille.hpp"
+ï»¿#include "grille.hpp"
 #include "fichier.hpp"
 #include <iostream>
 
 grille::grille() {
- //pas besoin de constructeur autre que celui par defaut A MODIFIERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+    //pas besoin de constructeur autre que celui par defaut A MODIFIERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 }
 
 std::vector<std::vector<cellule>>& grille::obtenirCellules() {
@@ -34,7 +34,7 @@ int grille::compterVoisinsVivants(int x, int y) const {
         for (int j = -1; j <= 1; ++j) {
 
             int xi = x + i;
-            
+
             if (xi < 0) { // torique
                 xi = cellules.size() + xi;
             }
@@ -58,18 +58,18 @@ int grille::compterVoisinsVivants(int x, int y) const {
             }
 
             if ((cellules[xi][yj].obtenirEtat() == true) and !(i == 0 and j == 0)) {
-                
+
                 compteur += 1;
-            }            
-        }        
+            }
+        }
     }
-    
+
     return compteur;
 }
 
 
 void grille::prochaineGeneration() {
-    std::vector<std::vector<cellule>> nouvelleGrille = cellules; //Si je ne fais pas ça les cellules changent en même temps que je la parcours
+    std::vector<std::vector<cellule>> nouvelleGrille = cellules; //Si je ne fais pas ï¿½a les cellules changent en mï¿½me temps que je la parcours
 
     for (int i = 0; i < cellules.size(); ++i) {
         for (int j = 0; j < cellules[0].size(); ++j) {
@@ -81,13 +81,13 @@ void grille::prochaineGeneration() {
                 }
             }
             else if (cellules[i][j].obtenirEtat() == false) { //cellule morte devient vivante si exactement 3 voisines
-                if (voisinsVivants == 3) { 
+                if (voisinsVivants == 3) {
                     nouvelleGrille[i][j].definirEtat(true);
                 }
             }
         }
     }
 
-    // applique les nouveaux états à la grille principale, en faisant cela les calculs de compterVoisinsVivants ne changent pas en cours de route
-        cellules = nouvelleGrille;
+    // applique les nouveaux ï¿½tats ï¿½ la grille principale, en faisant cela les calculs de compterVoisinsVivants ne changent pas en cours de route
+    cellules = nouvelleGrille;
 }

@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="cellule.cpp" />
     <ClCompile Include="fichier.cpp" />
+    <ClCompile Include="graphique.cpp" />
     <ClCompile Include="grille.cpp" />
     <ClCompile Include="lancement.cpp" />
     <ClCompile Include="main.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="cellule.hpp" />
     <ClInclude Include="fichier.hpp" />
+    <ClInclude Include="graphique.hpp" />
     <ClInclude Include="grille.hpp" />
     <ClInclude Include="lancement.hpp" />
   </ItemGroup>
