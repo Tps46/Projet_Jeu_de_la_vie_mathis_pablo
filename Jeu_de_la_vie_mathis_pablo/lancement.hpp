@@ -20,14 +20,14 @@ public:
     void leLancement();
 
 private:
-    // Attribut pour spécifier le nombre d'itérations à effectuer (peut-être utile pour la simulation)
+    // Attribut pour spécifier le nombre d'itérations à effectuer 
     int nombre_iteration;
 
     // Méthodes privées pour différents types de lancement
     // Lancement avec une interface graphique (avec durée d'itération)
     void lancementGraphique(int duree_iteration);
 
-    // Lancement avec affichage dans la console (peut-être pour des tests ou un mode plus simple)
+    // Lancement avec affichage dans la console 
     void lancementConsole();
 
     // Lancement pour effectuer un test unitaire de certaines fonctionnalités
