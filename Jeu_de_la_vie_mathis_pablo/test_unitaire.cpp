@@ -132,6 +132,6 @@ void lancerTests() {
     testGrille();
     testFichier();
     testGraphique();
-    std::cout << "Fin des test Unitaires\n------------------------------------------\n\n";
+    std::cout << "\n------------------------------------------\nFin des test Unitaires\n";
 }
 

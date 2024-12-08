@@ -66,7 +66,7 @@ int grille::compterVoisinsVivants(int x, int y) const {
 }
 
 
-void grille::prochaineGeneration() {
+bool grille::prochaineGeneration() {
     std::vector<std::vector<cellule>> nouvelleGrille = cellules; // Copie de la grille pour appliquer les changements après avoir compté les voisins
 
     for (int i = 0; i < cellules.size(); ++i) {
@@ -86,6 +86,24 @@ void grille::prochaineGeneration() {
         }
     }
 
+
+    
+    
+
+    bool check_evolution(false);
+    //bool total_evolution(false);
+    for (int y = 0; y < cellules[0].size(); ++y) {
+        for (int x = 0; x < cellules.size(); ++x) {
+            if (cellules[x][y].obtenirEtat() != nouvelleGrille[x][y].obtenirEtat()) {
+                check_evolution = true;
+                
+            }
+        }
+    }
+
+    
     // Appliquer les nouveaux états
     cellules = nouvelleGrille;
+
+    return(check_evolution);
 }

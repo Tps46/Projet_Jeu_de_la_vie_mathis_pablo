@@ -17,7 +17,7 @@ public:
     std::vector<std::vector<cellule>>& obtenirCellules();
     void initialiser(std::vector<std::vector<cellule>> entreeGrille);
     void afficher() const; // On met en const lorsque l'on n'a pas besoin de modifier
-    void prochaineGeneration();
+    bool prochaineGeneration();
 };
 
 #endif 

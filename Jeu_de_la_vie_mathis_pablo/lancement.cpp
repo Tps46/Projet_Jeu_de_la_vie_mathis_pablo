@@ -17,7 +17,7 @@ void lancement::leLancement()
 void lancement::lancementGraphique(int duree_iteration) {
 
     fichier fichierGraphique;
-    fichierGraphique.charger("test");
+    fichierGraphique.charger("test3");
     // f.affiche();
 
     grille maGrille;
@@ -32,7 +32,10 @@ void lancement::lancementGraphique(int duree_iteration) {
 
     // Boucle pour itérer sur les générations
     for (int i = 1; i <= nombre_iteration; ++i) {
-        maGrille.prochaineGeneration();
+        if (!maGrille.prochaineGeneration()) {
+            std::cout << "Le programme se répète" << std::endl;
+            break;
+        }
                 
         fichierGraphique.ecrire(i, maGrille);
 
@@ -56,7 +59,10 @@ void lancement::lancementConsole()
 
     // Boucle pour itérer sur les générations
     for (int i = 1; i <= nombre_iteration; ++i) {
-        maGrille.prochaineGeneration();
+        if (!maGrille.prochaineGeneration()) {
+            std::cout << "Le programme se répète" << std::endl;
+            break;
+        }
         std::cout << "Generation suivante:" << std::endl;
         maGrille.afficher();
 
@@ -76,11 +82,13 @@ void lancement::menu()
     int mode_lancement;
     std::cout << "Saisir mode de lancement \n1 pour Console\n2 pour Graphique\n3 pour les tests unitaires" << std::endl;
     std::cin >> mode_lancement;
+    if (mode_lancement != 3) {
+        int saisie_nombre_iteration;
+        std::cout << "Saisir le nombre max d'itération" << std::endl;
+        std::cin >> saisie_nombre_iteration;
+        nombre_iteration = saisie_nombre_iteration;
+    }
 
-    int saisie_nombre_iteration;
-    std::cout << "Saisir le nombre max d'itération" << std::endl;
-    std::cin >> saisie_nombre_iteration;
-    nombre_iteration = saisie_nombre_iteration;
     switch (mode_lancement) {
     case (1):
         lancementConsole();
