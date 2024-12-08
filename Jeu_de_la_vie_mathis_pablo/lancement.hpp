@@ -7,7 +7,7 @@
 class lancement {
 public:
     void leLancement();
-    void lancementGraphique();
+    void lancementGraphique(int duree_iteration);
     void lancementConsole();
     void lancementTest_unitaire();
     void menu();

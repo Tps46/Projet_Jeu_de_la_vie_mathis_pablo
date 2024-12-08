@@ -16,12 +16,12 @@ private:
     const int gridHeight;
     std::vector<std::vector<cellule>> grid;
     sf::RenderWindow window;
-
+    int duree_iteration;
 public:
     
     void renderGrid(std::vector<std::vector<cellule>> grid);
     graphique();
-    void initialiser(std::vector<std::vector<cellule>> grid);
+    void initialiser(std::vector<std::vector<cellule>> grid, int entree_duree_iteration);
 
     std::vector<std::vector<cellule>>& obtenirGrid();
 };

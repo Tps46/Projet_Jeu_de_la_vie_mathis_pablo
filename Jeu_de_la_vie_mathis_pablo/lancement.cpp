@@ -10,11 +10,11 @@ lancement::lancement(){}
 
 void lancement::leLancement()
 {
-    menu();
     
+    menu();    
 }
 
-void lancement::lancementGraphique() {
+void lancement::lancementGraphique(int duree_iteration) {
 
     fichier fichierGraphique;
     fichierGraphique.charger("test");
@@ -27,7 +27,7 @@ void lancement::lancementGraphique() {
 
     // Créer l'objet graphique
     graphique g;
-    g.initialiser(maGrille.obtenirCellules());
+    g.initialiser(maGrille.obtenirCellules(), duree_iteration);
     g.renderGrid(maGrille.obtenirCellules());
 
     // Boucle pour itérer sur les générations
@@ -82,7 +82,11 @@ void lancement::menu()
         lancementConsole();
         break;
     case (2):
-        lancementGraphique();
+        int duree_iteration;
+        std::cout << "Saisir la durée entre deux itérations (en milisecondes) :" << std::endl;
+        std::cin >> duree_iteration;
+        lancementGraphique(duree_iteration);
+        
         break;
     case (3):
         lancementTest_unitaire();

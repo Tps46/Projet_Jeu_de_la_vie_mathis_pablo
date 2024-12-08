@@ -105,7 +105,7 @@ void testGraphique() {
         {cellule(true), cellule(false), cellule(true)},
         {cellule(false), cellule(true), cellule(false)}
     };
-    graph.initialiser(testGrid2);
+    graph.initialiser(testGrid2, 500);
 
     bool check_graphique(true);
     for (int y = 0; y < testGrid2[0].size(); ++y) {
