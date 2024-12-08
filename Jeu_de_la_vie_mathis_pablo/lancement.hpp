@@ -6,7 +6,9 @@
 
 class lancement {
 public:
-    void lelancement();
+    void leLancement();
+    void lancementGraphique();
+    void lancementConsole();
     lancement();
 };
 

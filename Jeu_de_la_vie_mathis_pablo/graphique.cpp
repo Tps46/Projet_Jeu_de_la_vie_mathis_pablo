@@ -9,7 +9,7 @@ void graphique::initialiser(std::vector<std::vector<cellule>> entreeGrid) {
     grid = entreeGrid;
 
     // Redimensionner la fenêtre en fonction de la taille de la grille
-    window.create(sf::VideoMode(grid.size() * cellSize, grid[0].size() * cellSize), "Game of Life");
+    window.create(sf::VideoMode(grid[0].size() * cellSize, grid.size() * cellSize), "Game of Life");
 
     // La boucle d'événements pour la fenêtre
     while (window.isOpen()) {
@@ -35,10 +35,10 @@ void graphique::renderGrid(std::vector<std::vector<cellule>> grid) {
 
     window.clear();
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
-    for (x = 0; x < grid.size(); ++x) {
-        for (y = 0; y < grid[0].size(); ++y) {
+    for (y = 0; y < grid[0].size(); ++y) {
+        for (x = 0; x < grid.size(); ++x) {
             if (grid[x][y].obtenirEtat() == 1) {
-                cell.setPosition(x * cellSize, y * cellSize);
+                cell.setPosition(y * cellSize, x * cellSize);
                 window.draw(cell);
             }
         }

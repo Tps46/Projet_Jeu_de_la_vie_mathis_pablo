@@ -14,15 +14,13 @@ std::vector<std::vector<cellule>>& grille::obtenirCellules() {
 void grille::initialiser(std::vector<std::vector<cellule>> entreeGrille) {
 
     cellules = entreeGrille;
-    std::cout << "x : " << cellules.size() << std::endl;
-    std::cout << "y : " << cellules[0].size() << std::endl;
 
 }
 
 void grille::afficher() const {
     for (int i = 0; i < cellules.size(); ++i) {
         for (int j = 0; j < cellules[0].size(); ++j) {
-            std::cout << (cellules[i][j].obtenirEtat() ? '1' : '0') << " ";
+            std::cout << (cellules[j][i].obtenirEtat() ? '1' : '0') << " ";
         }
         std::cout << std::endl;
     }
