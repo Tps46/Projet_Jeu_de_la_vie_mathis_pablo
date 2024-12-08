@@ -28,15 +28,32 @@ void fichier::charger(const std::string& filename) {
 
     // Lecture caractère par caractère
     while (file.get(ch)) {
-        if (ch == '0' || ch == '1') { // Si le caractère est 0 ou 1 (état de la cellule)
-            maGrille[row][col] = cellule(ch == '1'); // Crée une cellule vivante (true) ou morte (false)
-            ++col;
+        if (ch == '0' || ch == '1' || ch == '2' || ch == '3') { // Si le caractère est valide
+            switch (ch) {
+            case '0': // Cellule normale morte
+                maGrille[row][col] = cellule(false, false);
+                break;
+            case '1': // Cellule normale vivante
+                maGrille[row][col] = cellule(true, false);
+                break;
+            case '2': // Obstacle mort
+                maGrille[row][col] = cellule(false, true);
+                break;
+            case '3': // Obstacle vivant
+                maGrille[row][col] = cellule(true, true);
+                break;
+            }
+
+            ++col; // Passer à la colonne suivante
+
             if (col == longeur) { // Si la ligne est complète
-                col = 0; // Réinitialiser la colonne
-                ++row; // Passer à la ligne suivante
+                col = 0;          // Réinitialiser la colonne
+                ++row;            // Passer à la ligne suivante
             }
         }
     }
+
+
 
     // Vérifie si le nombre de lignes et de colonnes correspond à la grille attendue
     if (row != hauteur || col != 0) {

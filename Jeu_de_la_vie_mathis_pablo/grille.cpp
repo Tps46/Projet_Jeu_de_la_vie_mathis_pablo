@@ -16,8 +16,12 @@ void grille::afficher() const {
     // Parcours de la grille pour afficher chaque cellule
     for (int i = 0; i < cellules.size(); ++i) { // Parcours des lignes
         for (int j = 0; j < cellules[0].size(); ++j) { // Parcours des colonnes
-            // Affiche '1' si la cellule est vivante, '0' si elle est morte
-            std::cout << (cellules[i][j].obtenirEtat() ? '1' : '0') << " ";
+            if (cellules[i][j].obtenirObstacle()) { //si obstacle
+                std::cout << (cellules[i][j].obtenirEtat() ? '3' : '2') << " "; // Affiche '3' si la cellule est vivante, '4' si elle est morte
+            }
+            else { // si non obstacle
+                std::cout << (cellules[i][j].obtenirEtat() ? '1' : '0') << " "; // Affiche '1' si la cellule est vivante, '0' si elle est morte
+            }
         }
         std::cout << std::endl; // Nouvelle ligne après chaque ligne de la grille
     }

@@ -37,25 +37,58 @@ void graphique::initialiser(std::vector<std::vector<cellule>> entreeGrid, int en
 
 // Méthode pour afficher la grille sur la fenêtre
 void graphique::renderGrid(std::vector<std::vector<cellule>> grid) {
-    int x, y; // Variables pour parcourir la grille
-    int cellSize = 20; // Taille de chaque cellule
+    // Efface le contenu précédent de la fenêtre afin de préparer l'affichage de la nouvelle génération
+    window.clear();
 
-    window.clear(); // Effacer le contenu précédent de la fenêtre
-    sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f)); // Création d'un rectangle pour chaque cellule
+    // Crée un objet 'RectangleShape' représentant une cellule. La taille de la cellule est ajustée par 'cellSize' (taille de la cellule)
+    sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
 
-    // Parcourir chaque cellule de la grille
-    for (y = 0; y < grid[0].size(); ++y) {  // Parcours des colonnes (hauteur de la grille)
-        for (x = 0; x < grid.size(); ++x) { // Parcours des lignes (largeur de la grille)
-            if (grid[x][y].obtenirEtat() == 1) { // Si la cellule est vivante
-                cell.setPosition(y * cellSize, x * cellSize); // Définir la position du rectangle (cellule)
-                window.draw(cell); // Dessiner la cellule sur la fenêtre
+    // Parcourt chaque ligne de la grille (y correspond aux lignes)
+    for (int y = 0; y < grid[0].size(); ++y) {
+        // Parcourt chaque colonne de la grille (x correspond aux colonnes)
+        for (int x = 0; x < grid.size(); ++x) {
+
+            // Calcule la position de chaque cellule sur la fenêtre en fonction de sa position dans la grille
+            // La cellule (x, y) sera placée dans la fenêtre en fonction de la taille de la cellule et de sa position dans la grille
+            cell.setPosition(y * cellSize, x * cellSize);
+
+            // Vérifie si la cellule (x, y) contient un "obstacle"
+            if (grid[x][y].obtenirObstacle()) {
+                // Si la cellule est un obstacle, vérifie si elle est vivante ou morte
+                if (grid[x][y].obtenirEtat()) {
+                    // Si la cellule est vivante, la couleur est définie sur vert
+                    cell.setFillColor(sf::Color::Green);
+                }
+                else {
+                    // Si la cellule est morte, la couleur est définie sur rouge
+                    cell.setFillColor(sf::Color::Red);
+                }
             }
+            else {
+                // Si la cellule n'est pas un obstacle, elle est affichée en fonction de son état (vivant ou mort)
+                if (grid[x][y].obtenirEtat()) {
+                    // Si la cellule est vivante, elle est colorée en blanc
+                    cell.setFillColor(sf::Color::White);
+                }
+                else {
+                    // Si la cellule est morte, elle est colorée en noir
+                    cell.setFillColor(sf::Color::Black);
+                }
+            }
+
+            // Dessine la cellule sur la fenêtre
+            window.draw(cell);
         }
     }
 
-    window.display(); // Afficher tous les objets dessinés sur la fenêtre
-    sf::sleep(sf::milliseconds(duree_iteration)); // Attendre pendant la durée spécifiée (en millisecondes)
+    // Affiche tous les objets dessinés sur la fenêtre (y compris toutes les cellules)
+    window.display();
+
+    // Met en pause l'exécution pour permettre à l'utilisateur de voir l'état actuel de la grille avant la prochaine mise à jour
+    sf::sleep(sf::milliseconds(duree_iteration));
 }
+
+
 
 // Méthode pour obtenir une référence vers la grille actuelle
 std::vector<std::vector<cellule>>& graphique::obtenirGrid() {
