@@ -1,10 +1,5 @@
 ﻿#include "grille.hpp"
 #include "fichier.hpp"
-#include <iostream>
-
-grille::grille() {
-    //pas besoin de constructeur autre que celui par defaut A MODIFIERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-}
 
 std::vector<std::vector<cellule>>& grille::obtenirCellules() {
     return cellules;

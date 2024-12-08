@@ -1,5 +1,3 @@
-
-#include <iostream>
 #include "test_unitaire.hpp"
 
 void testCellule() {

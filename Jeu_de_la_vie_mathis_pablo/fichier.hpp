@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <string>
 #include "cellule.hpp"
 #include "grille.hpp"
 
@@ -16,14 +19,13 @@ private:
 
 public:
     fichier();
-    ~fichier();
 
     void charger(const std::string& filename);
 
     std::vector<std::vector<cellule>>& obtenirGrille();
     
     void ecrire(int generation, grille& maGrille);
-
+    
 
 };
 

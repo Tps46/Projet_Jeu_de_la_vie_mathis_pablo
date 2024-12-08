@@ -1,14 +1,8 @@
 #include "fichier.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
+
 #include <windows.h>
 
 fichier::fichier() : hauteur(0), longeur(0) {}
-
-fichier::~fichier() {}
 
 void fichier::charger(const std::string& filename) {
     nomFichier = filename; // Enregistrer le nom du fichier d'entrée (sans le txt) nous le réutilisons pour l'écriture
