@@ -2,6 +2,7 @@
 #include "fichier.hpp"
 #include "grille.hpp"
 #include "graphique.hpp"
+#include "test_unitaire.hpp"
 #include <SFML/Graphics.hpp>
 
 lancement::lancement(){}
@@ -9,25 +10,14 @@ lancement::lancement(){}
 
 void lancement::leLancement()
 {
-    int mode_lancement;
-    std::cout << "saisir mode de lancement 1 pour Console\n2 pour Graphique" << std::endl;
-    std::cin >> mode_lancement;
-    switch (mode_lancement) {
-    case (1):
-        lancementConsole();
-        break;
-    case (2):
-        lancementGraphique();
-        break;
-    default:
-        lancementGraphique();
-    }
+    menu();
+    
 }
 
 void lancement::lancementGraphique() {
 
     fichier fichierGraphique;
-    fichierGraphique.charger("test3");
+    fichierGraphique.charger("test");
     // f.affiche();
 
     grille maGrille;
@@ -46,8 +36,7 @@ void lancement::lancementGraphique() {
                 
         fichierGraphique.ecrire(i, maGrille);
 
-        // Appeler la fonction graphique pour afficher la nouvelle génération
-        
+        // afficher la nouvelle génération
         g.renderGrid(maGrille.obtenirCellules());
     }
 }
@@ -55,7 +44,7 @@ void lancement::lancementGraphique() {
 void lancement::lancementConsole()
 {
     fichier fichierConsole;
-    fichierConsole.charger("test3");
+    fichierConsole.charger("test");
     
     grille maGrille;
 
@@ -75,5 +64,32 @@ void lancement::lancementConsole()
 
     }
 
+}
+
+void lancement::lancementTest_unitaire()
+{
+    lancerTests();
+}
+
+void lancement::menu()
+{
+    int mode_lancement;
+    std::cout << "saisir mode de lancement \n1 pour Console\n2 pour Graphique\n3 pour les tests unitaires" << std::endl;
+    std::cin >> mode_lancement;
+
+    switch (mode_lancement) {
+    case (1):
+        lancementConsole();
+        break;
+    case (2):
+        lancementGraphique();
+        break;
+    case (3):
+        lancementTest_unitaire();
+        break;
+    default:
+        std::cout << "Erreur mode choisi non renseigné";
+        menu();
+    }
 }
 

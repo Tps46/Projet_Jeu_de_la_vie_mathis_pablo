@@ -9,6 +9,8 @@ public:
     void leLancement();
     void lancementGraphique();
     void lancementConsole();
+    void lancementTest_unitaire();
+    void menu();
     lancement();
 };
 

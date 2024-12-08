@@ -73,9 +73,6 @@ void grille::prochaineGeneration() {
         for (int j = 0; j < cellules[0].size(); ++j) {
             int voisinsVivants = compterVoisinsVivants(i, j);
 
-            // Debug : Affichage du nombre de voisins vivants pour chaque cellule
-            std::cout << "Cellule (" << i << ", " << j << ") a " << voisinsVivants << " voisins vivants." << std::endl;
-
             if (cellules[i][j].obtenirEtat() == true) { // Cellule vivante
                 if (voisinsVivants != 2 && voisinsVivants != 3) {
                     nouvelleGrille[i][j].definirEtat(false);

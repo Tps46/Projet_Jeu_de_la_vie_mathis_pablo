@@ -136,6 +136,7 @@
     <ClCompile Include="grille.cpp" />
     <ClCompile Include="lancement.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_unitaire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cellule.hpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="graphique.hpp" />
     <ClInclude Include="grille.hpp" />
     <ClInclude Include="lancement.hpp" />
+    <ClInclude Include="test_unitaire.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

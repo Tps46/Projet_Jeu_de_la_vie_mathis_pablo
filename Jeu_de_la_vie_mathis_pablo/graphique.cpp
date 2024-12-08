@@ -50,3 +50,4 @@ void graphique::renderGrid(std::vector<std::vector<cellule>> grid) {
 std::vector<std::vector<cellule>>& graphique::obtenirGrid() {
     return grid;
 }
+
