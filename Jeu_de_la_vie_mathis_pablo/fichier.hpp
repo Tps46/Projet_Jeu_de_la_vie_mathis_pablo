@@ -5,7 +5,6 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include "cellule.hpp"
 #include "grille.hpp"
 
