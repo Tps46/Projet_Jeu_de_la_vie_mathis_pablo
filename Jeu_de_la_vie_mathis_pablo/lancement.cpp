@@ -17,8 +17,10 @@ void lancement::leLancement()
 void lancement::lancementGraphique(int duree_iteration) {
 
     fichier fichierGraphique;
-    fichierGraphique.charger("test3");
-    // f.affiche();
+
+    std::string nomFichier; 
+    std::cout << "Entrez le nom du fichier : "; 
+    std::cin >> nomFichier; fichierGraphique.charger(nomFichier);
 
     grille maGrille;
 
@@ -47,8 +49,11 @@ void lancement::lancementGraphique(int duree_iteration) {
 void lancement::lancementConsole()
 {
     fichier fichierConsole;
-    fichierConsole.charger("test");
     
+    std::string nomFichier;
+    std::cout << "Entrez le nom du fichier : "; 
+    std::cin >> nomFichier; fichierConsole.charger(nomFichier);
+
     grille maGrille;
 
     // Initialiser avec quelques cellules vivantes
